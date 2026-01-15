@@ -1,81 +1,115 @@
-
 import React from 'react';
 
 interface PricingProps {
   onOpenForm: () => void;
 }
 
+const plans = [
+  {
+    duration: "4 Months",
+    totalPrice: 8000,
+    monthlyPrice: 2000,
+    features: [
+      "4 Viral Reels / month",
+      "Basic Scripting",
+      "Standard Editing",
+      "Local Ad Setup"
+    ],
+    highlight: false,
+    color: "from-blue-500 to-blue-600"
+  },
+  {
+    duration: "6 Months",
+    totalPrice: 10000,
+    monthlyPrice: 1666,
+    features: [
+      "8 Viral Reels / month",
+      "Advanced Scripting",
+      "Cinematic Editing",
+      "Ad Management",
+      "Monthly Strategy Call"
+    ],
+    highlight: true,
+    color: "from-pink-500 to-purple-600"
+  },
+  {
+    duration: "12 Months",
+    totalPrice: 16000,
+    monthlyPrice: 1333,
+    features: [
+      "12 Viral Reels / month",
+      "Full Creative Direction",
+      "Premium Motion Graphics",
+      "Priority Support",
+      "Unlimited Revisions",
+      "Dedicated Account Manager"
+    ],
+    highlight: false,
+    color: "from-orange-500 to-yellow-500"
+  }
+];
+
 const Pricing: React.FC<PricingProps> = ({ onOpenForm }) => {
   return (
     <div className="mt-20 sm:mt-40">
       <div className="text-center mb-16 sm:mb-24 px-4">
         <h2 className="text-4xl sm:text-6xl md:text-8xl font-black tracking-tighter font-apple-display leading-tight uppercase text-balance">
-          Simple scaling. <br className="hidden sm:block"/>
-          <span className="text-happening italic font-editorial font-light">Real results.</span>
+          Choose Your <br className="hidden sm:block" />
+          <span className="text-happening italic font-editorial font-light">Growth Path.</span>
         </h2>
       </div>
 
-      <div className="max-w-5xl mx-auto px-4 sm:px-0">
-        <div className="relative group">
-          {/* Intense Glow Border Beam */}
-          <div className="absolute -inset-[2px] sm:-inset-[3px] bg-gradient-to-r from-blue-500 via-pink-500 to-yellow-500 rounded-[2rem] sm:rounded-[3.2rem] opacity-30 group-hover:opacity-70 blur-sm sm:blur-md transition-opacity duration-700 animate-[pulse_5s_infinite]"></div>
-          
-          <div className="relative bg-white border border-gray-100 p-8 sm:p-12 md:p-20 rounded-[1.8rem] sm:rounded-[3rem] shadow-2xl flex flex-col md:flex-row gap-10 md:gap-16 items-start">
-            <div className="flex-1 w-full">
-              <div className="mb-8 sm:mb-10">
-                <span className="bg-pink-50 text-pink-500 text-[9px] sm:text-[10px] font-black px-3 sm:px-4 py-1 sm:py-1.5 rounded-full tracking-widest uppercase mb-4 inline-block shadow-sm">The Shop Accelerator</span>
-                <h3 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight mb-2 font-apple-display uppercase">Accelerator</h3>
-                <p className="text-gray-400 font-semibold text-lg sm:text-xl leading-snug">Everything your shop needs to become the local talk of the town.</p>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+
+          {plans.map((plan, i) => (
+            <div
+              key={i}
+              className={`relative group rounded-[2.5rem] p-8 sm:p-10 flex flex-col h-full border transition-all duration-500 ${plan.highlight
+                  ? 'bg-black text-white border-transparent scale-105 shadow-2xl shadow-pink-500/20 z-10'
+                  : 'bg-white text-gray-900 border-gray-100 hover:border-gray-200 hover:shadow-xl hover:-translate-y-2'
+                }`}
+            >
+              {plan.highlight && (
+                <div className="absolute inset-x-0 -top-4 text-center">
+                  <span className="bg-gradient-to-r from-pink-500 to-purple-500 text-white text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest shadow-lg">Most Popular</span>
+                </div>
+              )}
+
+              <div className="mb-8">
+                <h3 className={`text-2xl font-bold mb-2 ${plan.highlight ? 'text-gray-100' : 'text-gray-900'}`}>{plan.duration}</h3>
+                <div className="flex items-baseline gap-2">
+                  <span className="text-5xl font-black tracking-tight">${plan.totalPrice.toLocaleString()}</span>
+                  <span className={`text-sm font-semibold ${plan.highlight ? 'text-gray-400' : 'text-gray-500'}`}>total</span>
+                </div>
+                <div className={`mt-2 text-sm font-medium ${plan.highlight ? 'text-gray-400' : 'text-gray-500'}`}>
+                  ~${Math.round(plan.totalPrice / parseInt(plan.duration)).toLocaleString()}/mo
+                </div>
               </div>
 
-              <div className="grid grid-cols-1 gap-y-4 sm:gap-y-6 mb-8 sm:mb-12">
-                {[
-                  "4 Viral Vertical Reels / month",
-                  "Trend-jacking Scripts & Hook Lab",
-                  "Professional On-camera Coaching",
-                  "Full Ad Campaign Optimization",
-                  "Conversion Tracking & Local SEO",
-                  "Real-time Collaboration Portal",
-                  "Cancel Anytime, No Contracts"
-                ].map((feature, i) => (
-                  <div key={i} className="flex items-center space-x-3 sm:space-x-5">
-                    <div className="flex-shrink-0 w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-pink-100 flex items-center justify-center">
-                      <svg className="w-3 h-3 sm:w-4 sm:h-4 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                      </svg>
-                    </div>
-                    <span className="text-gray-700 font-bold text-base sm:text-lg leading-tight">{feature}</span>
+              <div className="flex-grow space-y-4 mb-8">
+                {plan.features.map((feature, j) => (
+                  <div key={j} className="flex items-center space-x-3">
+                    <svg className={`w-5 h-5 flex-shrink-0 ${plan.highlight ? 'text-pink-400' : 'text-pink-500'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span className={`text-base font-medium ${plan.highlight ? 'text-gray-300' : 'text-gray-600'}`}>{feature}</span>
                   </div>
                 ))}
               </div>
-            </div>
 
-            <div className="w-full md:w-[380px] bg-gradient-to-b from-gray-50 to-white p-8 sm:p-10 md:p-12 rounded-[1.8rem] sm:rounded-[2.5rem] border border-gray-100 flex flex-col justify-between min-h-0 sm:min-h-[450px] shadow-inner">
-              <div className="mb-8 sm:mb-10">
-                <div className="flex items-baseline mb-3 sm:mb-4">
-                  <span className="text-5xl sm:text-7xl font-black tracking-tight">$2,495</span>
-                  <span className="text-gray-400 font-bold ml-2 text-lg sm:text-xl">/mo</span>
-                </div>
-                <p className="text-gray-500 font-bold text-base sm:text-lg leading-relaxed italic">"It's like hiring a full marketing department for the cost of a barista."</p>
-              </div>
-
-              <div className="space-y-3 sm:space-y-4">
-                <button 
-                  onClick={onOpenForm}
-                  className="w-full bg-black text-white py-5 sm:py-7 rounded-2xl sm:rounded-3xl text-xl sm:text-2xl font-black hover:scale-[1.03] active:scale-95 transition-all duration-300 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.3)] group/btn overflow-hidden relative"
-                >
-                  <span className="relative z-10 uppercase">Secure Your Slot</span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-pink-600 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-500"></div>
-                </button>
-                <button 
-                  onClick={onOpenForm}
-                  className="w-full bg-white border-2 border-gray-100 text-gray-900 py-4 sm:py-5 rounded-2xl sm:rounded-3xl font-black text-base sm:text-lg hover:bg-gray-50 transition-colors"
-                >
-                  Talk to a Human
-                </button>
-              </div>
+              <button
+                onClick={onOpenForm}
+                className={`w-full py-4 rounded-xl font-bold text-lg transition-all duration-300 ${plan.highlight
+                    ? 'bg-white text-black hover:bg-gray-100 uppercase tracking-wide'
+                    : 'bg-black text-white hover:bg-gray-800'
+                  }`}
+              >
+                Get Started
+              </button>
             </div>
-          </div>
+          ))}
+
         </div>
       </div>
     </div>
