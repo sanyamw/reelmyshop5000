@@ -20,7 +20,7 @@ const plans = [
   },
   {
     duration: "6 Months",
-    totalPrice: 10000,
+    totalPrice: 100000,
     monthlyPrice: 1666,
     features: [
       "8 Viral Reels / month",
@@ -66,8 +66,8 @@ const Pricing: React.FC<PricingProps> = ({ onOpenForm }) => {
             <div
               key={i}
               className={`relative group rounded-[2.5rem] p-8 sm:p-10 flex flex-col h-full border transition-all duration-500 ${plan.highlight
-                  ? 'bg-black text-white border-transparent scale-105 shadow-2xl shadow-pink-500/20 z-10'
-                  : 'bg-white text-gray-900 border-gray-100 hover:border-gray-200 hover:shadow-xl hover:-translate-y-2'
+                ? 'bg-black text-white border-transparent scale-105 shadow-2xl shadow-pink-500/20 z-10'
+                : 'bg-white text-gray-900 border-gray-100 hover:border-gray-200 hover:shadow-xl hover:-translate-y-2'
                 }`}
             >
               {plan.highlight && (
@@ -101,8 +101,8 @@ const Pricing: React.FC<PricingProps> = ({ onOpenForm }) => {
               <button
                 onClick={onOpenForm}
                 className={`w-full py-4 rounded-xl font-bold text-lg transition-all duration-300 ${plan.highlight
-                    ? 'bg-white text-black hover:bg-gray-100 uppercase tracking-wide'
-                    : 'bg-black text-white hover:bg-gray-800'
+                  ? 'bg-white text-black hover:bg-gray-100 uppercase tracking-wide'
+                  : 'bg-black text-white hover:bg-gray-800'
                   }`}
               >
                 Get Started
